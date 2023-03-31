@@ -1,11 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, useWindowDimensions, View } from "react-native";
+import { useHookstate } from "@hookstate/core";
+
+import { ChatList, TextField } from "./components";
+import { chat } from "./utils/globalStates";
 
 export default function App() {
+  const chatArr = useHookstate(chat?.chatObj)?.get();
+  const { height, width } = useWindowDimensions();
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <View
+        style={
+          Platform.OS == "web"
+            ? {
+                flex: 1,
+              }
+            : { flex: 1 }
+        }
+      >
+        <ChatList />
+      </View>
+      <View style={{ flexDirection: "column-reverse" }}>
+        <TextField chatHistory={chatArr} />
+      </View>
     </View>
   );
 }
@@ -13,8 +31,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fafafa",
+    paddingHorizontal: Platform.OS == "web" ? 200 : 20,
+    paddingVertical: Platform.OS == "web" ? 80 : 20,
   },
 });
