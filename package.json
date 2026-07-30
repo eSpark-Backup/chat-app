@@ -11,7 +11,7 @@
   "dependencies": {
     "@expo/webpack-config": "^19.0.1",
     "@hookstate/core": "^4.0.1",
-    "expo": "~56.0.12",
+    "expo": "~57.0.9",
     "expo-status-bar": "~56.0.4",
     "react": "19.2.7",
     "react-dom": "19.2.7",
